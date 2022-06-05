@@ -66,9 +66,7 @@ class ItemListController extends Controller
             "item_id" => ["required", "exists:items,id"],
         ]);
 
-        ItemList::create( $input );
-
-        return Redirect::route('list.index');
+        return Response()->json(['success' => ItemList::create( $input )]);
     }
 
     /**

@@ -23603,7 +23603,11 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var submit = function submit() {
-      if (form.isDirty) form.post(route('list.store'));
+      if (form.isDirty) axios.post(route('list.store', form), {
+        maxRedirects: 0
+      }).then(function ($response) {
+        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia.reload();
+      });
     };
 
     var purchaseCheck = function purchaseCheck(item) {

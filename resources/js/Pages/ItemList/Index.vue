@@ -103,7 +103,12 @@ const destroy = (id) => {
 
 const submit = () => {
     if ( form.isDirty )
-        form.post(route('list.store') );
+        axios.post(route('list.store', form), {
+            maxRedirects : 0
+        })
+        .then (function($response) {
+            Inertia.reload();
+        });
 };
 
 const purchaseCheck = function(item) {
@@ -128,7 +133,7 @@ const updateItemList = function(id, updatedValues) {
     axios.put(route('list.update', [id, updatedValues]),{
         maxRedirects  : 0
     })
-    .then( function(response){
+    .then(function(response){
         Inertia.reload();
     } );
 }
