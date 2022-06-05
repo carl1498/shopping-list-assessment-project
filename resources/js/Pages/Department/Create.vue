@@ -18,11 +18,12 @@
                         <form @submit.prevent="submit">
                             <div>
                                 <JetLabel for="name" value="Department Name" />
-                                <span v-if="form.errors.name" class="text-red-500 text-xs">{{form.errors.name}}</span>
+                                <span v-if="form.errors.name" class="text-red-500 text-xs">{{ form.errors.name }}</span>
                                 <JetInput
                                     id="name"
                                     v-model="form.name"
                                     type="text"
+                                    :class="{ 'bg-red-50' : form.errors.name }"
                                     class="mt-1 block w-full"
                                     required
                                     autofocus

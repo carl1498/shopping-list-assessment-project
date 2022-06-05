@@ -27755,13 +27755,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return $setup.form.name = $event;
         }),
         type: "text",
-        "class": "mt-1 block w-full",
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
+          'bg-red-50': $setup.form.errors.name
+        }, "mt-1 block w-full"]),
         required: "",
         autofocus: "",
         autocomplete: "name"
       }, null, 8
       /* PROPS */
-      , ["modelValue"])])], 40
+      , ["modelValue", "class"])])], 40
       /* PROPS, HYDRATE_EVENTS */
       , _hoisted_8)])])])])];
     }),
