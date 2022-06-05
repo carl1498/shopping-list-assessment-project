@@ -28,15 +28,14 @@
                                     autofocus
                                     autocomplete="name"
                                 />
-
                             </div>
                             <div>
                                 <JetLabel for="name" value="Department" />
                                 <span v-if="form.errors.department_id" class="text-red-500 text-xs">{{form.errors.department_id}}</span>
                                 <select v-model="form.department_id" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm rounded-md shadow-sm" required>
                                     <option value="">Please Select</option>
-                                    <template v-for="department in departments" :key="'department_id_'+department.id">
-                                        <option :value="department.id">{{ department.name }}</option>
+                                    <template v-for="department in departments" :key="'department_id_'+department.department_id">
+                                        <option :value="department.department_id">{{ department.name }}</option>
                                     </template>
                                 </select>
                             </div>
@@ -67,17 +66,16 @@ const form = useForm({
 
 const submit = () => {
     if ( form.isDirty )
-        form.put(route('items.update', props.item) );
+        form.put(route('items.update', props.item));
 };
 
 const destroy = (id) => {
-
     axios.delete( route('items.destroy', id), {
       maxRedirects  : 0
-    }  )
-        .then( function(response){
-            Inertia.reload();
-        } )
+    })
+    .then( function(response){
+        Inertia.reload();
+    })
 }
 
 </script>

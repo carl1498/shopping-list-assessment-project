@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('item_id');
             $table->string('name', 128);
-            $table->unsignedBigInteger('department_id');
+            $table->foreignId('department_id')->constrained('departments', 'department_id');
+            $table->timestamps();
             $table->softDeletes();
         });
     }

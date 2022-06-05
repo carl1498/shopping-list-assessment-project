@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('item_list', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('line_items', function (Blueprint $table) {
+            $table->id('line_item_id');
             $table->unsignedInteger('quantity');
             $table->boolean('purchased')->default(false);
-            $table->unsignedBigInteger('item_id');
+            $table->foreignId('item_id')->constrained('items', 'item_id');
+            $table->timestamps();
             $table->softDeletes();
         });
     }

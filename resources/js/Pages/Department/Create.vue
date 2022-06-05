@@ -28,7 +28,6 @@
                                     autofocus
                                     autocomplete="name"
                                 />
-
                             </div>
                         </form>
                     </div>
@@ -50,7 +49,7 @@ const form = useForm({
 
 const submit = () => {
     if ( form.isDirty )
-        form.post(route('departments.store') );
+        form.post(route('departments.store'));
 };
 </script>
 

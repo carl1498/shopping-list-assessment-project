@@ -17,10 +17,10 @@
                             <div class="w-1/2">
                                 <select v-model="form.item_id" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required>
                                     <option value="">Please Select</option>
-                                    <template v-for="department in departments" :key="'department_id_'+department.id">
+                                    <template v-for="department in departments" :key="'department_id_'+department.department_id">
                                         <option disabled="">{{ department.name }}</option>
-                                        <template v-for="item in department.items" :key="'item_id_'+item.id">
-                                            <option :value="item.id">{{ item.name }}</option>
+                                        <template v-for="item in department.items" :key="'item_id_'+item.item_id">
+                                            <option :value="item.item_id">{{ item.name }}</option>
                                         </template>
                                     </template>
                                 </select>
@@ -37,10 +37,10 @@
                     </div>
 
                     <div class="px-8 my-16 space-y-8 h-screen">
-                        <div v-for="(itemList, departmentName ) in itemLists" :key="'item_list_department_'+departmentName">
+                        <div v-for="(lineItem, departmentName ) in lineItems" :key="'line_item_department_name_'+departmentName">
                             <h2 class="bold text-2xl border-b-2 border-gray-50 py-2">{{ departmentName }}</h2>
                             <div class="space-y-4 divide-y divide-y-gray-50">
-                                <div v-for="item in itemList.items" :key="'item_list_id_'+item.id" 
+                                <div v-for="item in lineItem.items" :key="'line_item_id_'+item.line_item_id" 
                                     :class="{ 'opacity-25' : item.purchased }"
                                     class="list-decimal px-8 py-4 flex justify-between items-center">
                                     <div class="w-1/2 flex items-center">
@@ -60,7 +60,7 @@
                                             <span v-if="item.quantity < 0" class="text-red-500 text-xs">Quantity cannot be less than 0, this will not save</span>
                                         </div>
                                     </div>
-                                    <span class="underline cursor-pointer text-xs" @click="destroy(item.id)">Delete</span>
+                                    <span class="underline cursor-pointer text-xs" @click="destroy(item.line_item_id)">Delete</span>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@ import {computed} from "vue";
 
 const props = defineProps({
     departments: Array,
-    itemLists: Object,
+    lineItems: Object,
 });
 
 const form = useForm({
@@ -93,7 +93,7 @@ const currentQuantityField = useForm({
 
 const destroy = (id) => {
 
-    axios.delete( route('list.destroy', id), {
+    axios.delete( route('line-items.destroy', id), {
       maxRedirects  : 0
     }  )
         .then( function(response){
@@ -103,7 +103,7 @@ const destroy = (id) => {
 
 const submit = () => {
     if ( form.isDirty )
-        axios.post(route('list.store', form), {
+        axios.post(route('line-items.store', form), {
             maxRedirects : 0
         })
         .then (function($response) {
@@ -116,7 +116,7 @@ const purchaseCheck = function(item) {
         purchased: event.target.checked
     };
 
-    updateItemList(item.id, updatedValues);
+    updateLineItem(item.line_item_id, updatedValues);
 };
 
 const updateQuantity = function(item) {
@@ -125,12 +125,12 @@ const updateQuantity = function(item) {
     };
     
     if (currentQuantityField.oldValue != event.target.value && event.target.value > -1) {
-        updateItemList(item.id, updatedValues);
+        updateLineItem(item.line_item_id, updatedValues);
     }
 };
 
-const updateItemList = function(id, updatedValues) {
-    axios.put(route('list.update', [id, updatedValues]),{
+const updateLineItem = function(line_item_id, updatedValues) {
+    axios.put(route('line-items.update', [line_item_id, updatedValues]),{
         maxRedirects  : 0
     })
     .then(function(response){

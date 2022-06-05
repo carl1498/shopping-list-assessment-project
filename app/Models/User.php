@@ -59,6 +59,9 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    /**
+     * Get the departments for the user.
+     */
     public function departments(){
         return $this->hasMany(Department::class);
     }

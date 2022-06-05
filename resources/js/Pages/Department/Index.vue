@@ -14,11 +14,10 @@
                     </div>
 
                     <ol class="px-8 my-16 h-screen space-y-4 divide-y divide-y-gray-50">
-                        <li v-for="department in departments" class="list-decimal px-8 py-4 flex justify-between items-center">
-                            <Link class="block" :href="route( 'departments.show', department)" >{{department.name}}</Link>
-                            <span class="underline cursor-pointer text-xs" @click="destroy(department.id)">Delete</span>
+                        <li v-for="department in departments" :key="'department_id_'+department.department_id" class="list-decimal px-8 py-4 flex justify-between items-center">
+                            <Link class="block" :href="route( 'departments.show', department.department_id)" >{{department.name}}</Link>
+                            <span class="underline cursor-pointer text-xs" @click="destroy(department.department_id)">Delete</span>
                         </li>
-
                     </ol>
                 </div>
             </div>
@@ -37,13 +36,12 @@ defineProps({
 });
 
 const destroy = (id) => {
-
     axios.delete( route('departments.destroy', id), {
       maxRedirects  : 0
-    }  )
-        .then( function(response){
-            Inertia.reload();
-        } )
+    })
+    .then( function(response){
+        Inertia.reload();
+    })
 }
 
 </script>

@@ -28,7 +28,6 @@
                                     autofocus
                                     autocomplete="name"
                                 />
-
                             </div>
                         </form>
                         <div class="mt-16">
@@ -64,17 +63,16 @@ const form = useForm({
 
 const submit = () => {
     if ( form.isDirty )
-        form.put(route('departments.update', props.department) );
+        form.put(route('departments.update', props.department));
 };
 
 const destroy = (id) => {
-
     axios.delete( route('items.destroy', id), {
       maxRedirects  : 0
-    }  )
-        .then( function(response){
-            Inertia.reload();
-        } )
+    })
+    .then( function(response){
+        Inertia.reload();
+    })
 }
 
 </script>

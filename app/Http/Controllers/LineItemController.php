@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
-use App\Models\Item;
-use App\Http\Requests\Item\StoreItemRequest;
-use App\Http\Requests\Item\UpdateItemRequest;
+use App\Models\LineItem;
+use App\Http\Requests\LineItem\StoreLineItemRequest;
+use App\Http\Requests\LineItem\UpdateLineItemRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
-class ItemController extends Controller
+class LineItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +19,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $departments = Department::has('items')->with('items')->orderBy('name')->get();
-
-        return Request()->expectsJson()
-            ? Response()->json(compact('departments'))
-            : Inertia::render('Item/Index', compact('departments'));
+        //
     }
 
     /**
@@ -33,9 +29,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        $departments = Department::all();
-
-        return Inertia::render('Item/Create', compact('departments'));
+        //
     }
 
     /**
@@ -44,11 +38,9 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreItemRequest $request)
+    public function store(StoreLineItemRequest $request)
     {
-        Item::create( $request->validated() );
-
-        return Redirect::route('items.index');
+        return Response()->json(['success' => LineItem::create($request->validated())]);
     }
 
     /**
@@ -57,11 +49,9 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $item)
+    public function show($id)
     {
-        $departments = Department::all();
-
-        return Inertia::render('Item/Edit', compact('item', 'departments'));
+        //
     }
 
     /**
@@ -70,11 +60,9 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Item $item)
+    public function edit($id)
     {
-        $departments = Department::all();
-
-        return Inertia::render('Item/Edit', compact('item', 'departments'));
+        //
     }
 
     /**
@@ -84,11 +72,9 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateItemRequest $request, Item $item)
+    public function update(UpdateLineItemRequest $request, LineItem $lineItem)
     {
-        $item->update( $request->validated() );
-
-        return Redirect::route('items.index');
+        return Response()->json(['success' => $lineItem->update( $request->validated() )]);
     }
 
     /**
@@ -97,8 +83,8 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
+    public function destroy(LineItem $lineItem)
     {
-        return Response()->json(['success' => $item->delete()]);
+        return Response()->json(['success' => $lineItem->delete()]);
     }
 }

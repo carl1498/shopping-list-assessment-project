@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Http\Requests\Department\StoreDepartmentRequest;
+use App\Http\Requests\Department\UpdateDepartmentRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -40,13 +42,9 @@ class DepartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreDepartmentRequest $request)
     {
-        $input = $request->validate([
-           "name" => ["required", "min:5", "max:64", 'unique:departments']
-        ]);
-
-        Department::create( $input );
+        Department::create( $request->validated() );
 
         return Redirect::route('departments.index');
     }
@@ -84,13 +82,9 @@ class DepartmentController extends Controller
      * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Department $department)
+    public function update(UpdateDepartmentRequest $request, Department $department)
     {
-        $input = $request->validate([
-           "name" => ["required", "min:5", "max:64", Rule::unique('departments')->ignore($department->id) ]
-        ]);
-
-        $department->update( $input );
+        $department->update( $request->validated() );
 
         return Redirect::route('departments.index');
     }
