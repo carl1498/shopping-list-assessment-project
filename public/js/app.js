@@ -23471,7 +23471,7 @@ __webpack_require__.r(__webpack_exports__);
     });
 
     var submit = function submit() {
-      if (form.isDirty) form.put(route('departments.update', props.department));
+      if (form.isDirty) form.put(route('departments.update', props.department.department_id));
     };
 
     var destroy = function destroy(id) {
@@ -23654,7 +23654,7 @@ __webpack_require__.r(__webpack_exports__);
     });
 
     var submit = function submit() {
-      if (form.isDirty) form.put(route('items.update', props.item));
+      if (form.isDirty) form.put(route('items.update', props.item.item_id));
     };
 
     var destroy = function destroy(id) {
@@ -27874,13 +27874,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return $setup.form.name = $event;
         }),
         type: "text",
-        "class": "mt-1 block w-full",
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
+          'bg-red-50': $setup.form.errors.name
+        }, "mt-1 block w-full"]),
         required: "",
         autofocus: "",
         autocomplete: "name"
       }, null, 8
       /* PROPS */
-      , ["modelValue"])])], 40
+      , ["modelValue", "class"])])], 40
       /* PROPS, HYDRATE_EVENTS */
       , _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.department.items, function (item) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
@@ -28254,13 +28256,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return $setup.form.name = $event;
         }),
         type: "text",
-        "class": "mt-1 block w-full",
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
+          'bg-red-50': $setup.form.errors.name
+        }, "mt-1 block w-full"]),
         required: "",
         autofocus: "",
         autocomplete: "name"
       }, null, 8
       /* PROPS */
-      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
+      , ["modelValue", "class"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["JetLabel"], {
         "for": "name",
         value: "Department"
       }), $setup.form.errors.department_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.errors.department_id), 1
@@ -28269,7 +28273,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $setup.form.department_id = $event;
         }),
-        "class": "mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm rounded-md shadow-sm",
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm rounded-md shadow-sm", {
+          'bg-red-50': $setup.form.errors.department_id
+        }]),
         required: ""
       }, [_hoisted_11, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.departments, function (department) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
@@ -28280,8 +28286,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , _hoisted_12);
       }), 128
       /* KEYED_FRAGMENT */
-      ))], 512
-      /* NEED_PATCH */
+      ))], 2
+      /* CLASS */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.form.department_id]])])], 40
       /* PROPS, HYDRATE_EVENTS */
       , _hoisted_8)])])])])];

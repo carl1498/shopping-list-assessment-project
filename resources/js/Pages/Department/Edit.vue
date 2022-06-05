@@ -23,6 +23,7 @@
                                     id="name"
                                     v-model="form.name"
                                     type="text"
+                                    :class="{ 'bg-red-50' : form.errors.name }"
                                     class="mt-1 block w-full"
                                     required
                                     autofocus
@@ -63,7 +64,7 @@ const form = useForm({
 
 const submit = () => {
     if ( form.isDirty )
-        form.put(route('departments.update', props.department));
+        form.put(route('departments.update', props.department.department_id));
 };
 
 const destroy = (id) => {

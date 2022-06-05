@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="px-8 my-16 space-y-8 h-screen">
-                        <div v-for="(lineItem, departmentName ) in lineItems" :key="'line_item_department_name_'+departmentName">
+                        <div v-for="(lineItem, departmentName) in lineItems" :key="'line_item_department_name_'+departmentName">
                             <h2 class="bold text-2xl border-b-2 border-gray-50 py-2">{{ departmentName }}</h2>
                             <div class="space-y-4 divide-y divide-y-gray-50">
                                 <div v-for="item in lineItem.items" :key="'line_item_id_'+item.line_item_id" 
@@ -94,11 +94,11 @@ const currentQuantityField = useForm({
 const destroy = (id) => {
 
     axios.delete( route('line-items.destroy', id), {
-      maxRedirects  : 0
-    }  )
-        .then( function(response){
-            Inertia.reload();
-        } )
+        maxRedirects  : 0
+    })
+    .then( function(response){
+        Inertia.reload();
+    })
 }
 
 const submit = () => {
@@ -135,7 +135,7 @@ const updateLineItem = function(line_item_id, updatedValues) {
     })
     .then(function(response){
         Inertia.reload();
-    } );
+    });
 }
 
 </script>
