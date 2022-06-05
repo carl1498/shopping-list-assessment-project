@@ -1,23 +1,23 @@
 <template>
     <app-layout>
-        <Head title="New Department" />
+        <Head title="New Item" />
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                New Department
+                New Item
             </h2>
         </template>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="flex justify-end py-4 px-8 space-x-4">
-                        <Link :href="route('departments.index')" class="underline cursor-pointer">Cancel</Link>
+                        <Link :href="route('items.index')" class="underline cursor-pointer">Cancel</Link>
                         <span @click="submit" class="underline" :class="{'text-gray-black cursor-pointer': form.isDirty, 'cursor-not-allowed text-gray-400': !form.isDirty}">Update</span>
                     </div>
 
                     <div class="px-8 my-16 h-screen ">
                         <form @submit.prevent="submit">
                             <div>
-                                <JetLabel for="name" value="Department Name" />
+                                <JetLabel for="name" value="Item Name" />
                                 <span v-if="form.errors.name" class="text-red-500 text-xs">{{form.errors.name}}</span>
                                 <JetInput
                                     id="name"
@@ -30,16 +30,17 @@
                                 />
 
                             </div>
-                        </form>
-                        <div class="mt-16">
-                            <h2 class="bold text-2xl border-b-2 border-gray-50 py-2">Items</h2>
-                            <div class="space-y-4 divide-y divide-y-gray-50">
-                                <div v-for="item in department.items" :key="'item_id_'+item.id" class="list-decimal px-8 py-4 flex justify-between items-center">
-                                    <Link class="block">{{ item.name }}</Link>
-                                    <span class="underline cursor-pointer text-xs" @click="destroy(item.id)">Delete</span>
-                                </div>
+                            <div>
+                                <JetLabel for="name" value="Department" />
+                                <span v-if="form.errors.department_id" class="text-red-500 text-xs">{{form.errors.department_id}}</span>
+                                <select v-model="form.department_id" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm rounded-md shadow-sm" required>
+                                    <option value="">Please Select</option>
+                                    <template v-for="department in departments" :key="'department_id_'+department.id">
+                                        <option :value="department.id">{{ department.name }}</option>
+                                    </template>
+                                </select>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -55,16 +56,18 @@ import JetInput from '@/Jetstream/Input.vue';
 import JetLabel from '@/Jetstream/Label.vue';
 
 const props = defineProps({
-    department: Object,
+    item: Object,
+    departments: Array,
 });
 
 const form = useForm({
-    name: props.department.name,
+    name: props.item.name,
+    department_id: props.item.department_id,
 });
 
 const submit = () => {
     if ( form.isDirty )
-        form.put(route('departments.update', props.department) );
+        form.put(route('items.update', props.item) );
 };
 
 const destroy = (id) => {

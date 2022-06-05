@@ -28,8 +28,8 @@
 
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import { Link, Head } from '@inertiajs/inertia-vue3'
-import { Inertia } from '@inertiajs/inertia'
+import { Link, Head } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia';
 import {computed} from "vue";
 
 defineProps({

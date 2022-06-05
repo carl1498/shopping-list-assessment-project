@@ -37,6 +37,7 @@ Route::middleware([
     })->name('dashboard');
 
     Route::resource( "/departments", \App\Http\Controllers\DepartmentController::class );
+    Route::resource( "/items", \App\Http\Controllers\ItemController::class );
 
 
 });

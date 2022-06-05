@@ -28,8 +28,6 @@ class Department extends Model
             if ( Auth()->user() )
                 $builder->where('user_id', '=', Auth()->user()->id );
         });
-
-
     }
 
     protected function setSlug(){
@@ -39,5 +37,9 @@ class Department extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function items(){
+        return $this->hasMany(Item::class);
     }
 }
