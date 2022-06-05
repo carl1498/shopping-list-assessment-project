@@ -49,8 +49,8 @@ const logout = () => {
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <JetNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                <JetNavLink :href="route('list.index')" :active="route().current('list.index')">
+                                    My Shopping List
                                 </JetNavLink>
                                 <JetNavLink :href="route('items.index')" :active="route().current('items.index')">
                                     Items
